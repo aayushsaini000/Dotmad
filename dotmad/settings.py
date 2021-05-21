@@ -13,7 +13,7 @@ SPIDER_MODULES = ['dotmad.spiders']
 NEWSPIDER_MODULE = 'dotmad.spiders'
 
 
-ChormeDriver = b'C:\Users\Aayush\Downloads\Jobs_Scrapper-master\Jobs_Scrapper-master\jobs_scrapy\spiders\chromedriver.exe'
+ChormeDriver = '/home/manish/projects/RestBoilerplate/docs/Dotmad/dotmad/chromedriver'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'dotmad (+http://www.yourdomain.com)'
 USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'
@@ -25,8 +25,8 @@ ROBOTSTXT_OBEY = False
 # }
 
 DOWNLOAD_DELAY = 0.01
-CONCURRENT_REQUESTS_PER_DOMAIN = 60000
-CONCURRENT_REQUESTS_PER_IP = 60000
+CONCURRENT_REQUESTS_PER_DOMAIN = 40
+CONCURRENT_REQUESTS_PER_IP = 40
 RETRY_HTTP_CODES = [403, 429, 500, 503]
 RETRY_TIMES = 10
 LOG_ENABLED = True
@@ -98,3 +98,29 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+# Retry many times since proxies often fail
+# RETRY_TIMES = 10
+# # Retry on most error codes since proxies fail for different reasons
+# RETRY_HTTP_CODES = [500, 503, 504, 400, 403, 404, 408]
+
+# DOWNLOADER_MIDDLEWARES = {
+#     'scrapy.downloadermiddlewares.retry.RetryMiddleware': 90,
+#     'scrapy_proxies.RandomProxy': 100,
+#     'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 110,
+# }
+
+# # Proxy list containing entries like
+# # http://host1:port
+# # http://username:password@host2:port
+# # http://host3:port
+# # ...
+# #PROXY_LIST = '/path/to/proxy/list.txt'
+
+# # Proxy mode
+# # 0 = Every requests have different proxy
+# # 1 = Take only one proxy from the list and assign it to every requests
+# # 2 = Put a custom proxy to use in the settings
+# PROXY_MODE = 2
+
+# # If proxy mode is 2 uncomment this sentence :
+# CUSTOM_PROXY = "175.215.29.220:3128"

@@ -78,7 +78,6 @@ class DotMad1Spider(scrapy.Spider):
         
         selenium_response_text = driver.page_source
         new_selector = Selector(text=selenium_response_text)
-        
         items = DotmadItem()
 
         LineData = new_selector.css(".visit_menu_link li span::text").extract()
@@ -93,7 +92,7 @@ class DotMad1Spider(scrapy.Spider):
         ListingLink = response.url
         AskingPrice = new_selector.css(".price::text").extract()[0].strip() if new_selector.css(".price::text").extract() else None
         Condition = new_selector.css(".item_description_list ul li::text").extract()[0].replace(u'\xa0', u' ').strip() if new_selector.css(".item_description_list ul li::text").extract() else None
-        QtyAvailable = new_selector.css(".listing_info li::text").extract()[-3].strip() if new_selector.css(".listing_info li::text").extract()[-3].strip() != '' else new_selector.css(".listing_info li::text").extract()[-2].strip()
+        QtyAvailable = new_selector.css(".listing_info li::text").extract()[-3].strip() if new_selector.css(".listing_info li::text").extract() else None
         InStock = new_selector.css(".active::text").extract()[0].strip() if new_selector.css(".active::text").extract() else None
         Date = new_selector.css(".listing_info li::text").extract()[-1].strip() if new_selector.css(".listing_info li::text").extract() else None
         Company = new_selector.css(".ratting:nth-child(1) .seller_name::text").extract()[0].strip() if new_selector.css(".ratting:nth-child(1) .seller_name::text").extract() else None
