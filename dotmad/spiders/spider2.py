@@ -20,7 +20,10 @@ class DotMad1Spider(scrapy.Spider):
     def __init__(self, *args, **kwargs): 
         super(DotMad1Spider, self).__init__(*args, **kwargs) 
         self.start_urls = [kwargs.get('start_url')] 
-
+        self.chrome_options = webdriver.ChromeOptions()
+        self.chrome_options.add_argument('--headless')
+        self.chrome_options.add_argument('--no-sandbox')
+        self.driver = webdriver.Chrome(ChormeDriver,chrome_options=self.chrome_options)
 
     def start_requests(self):        
         for url in self.start_urls:
@@ -69,14 +72,9 @@ class DotMad1Spider(scrapy.Spider):
 
 
     def ScrapData(self,response):
-
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_argument('--headless')
-        chrome_options.add_argument('--no-sandbox')
-        driver = webdriver.Chrome(ChormeDriver,chrome_options=chrome_options)
-        driver.get(response.url)
+        self.driver.get(response.url)
         
-        selenium_response_text = driver.page_source
+        selenium_response_text = self.driver.page_source
         new_selector = Selector(text=selenium_response_text)
 
         # new_selector = response

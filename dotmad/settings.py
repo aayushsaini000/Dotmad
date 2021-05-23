@@ -24,12 +24,12 @@ ROBOTSTXT_OBEY = False
 #     'xlsx': 'scrapy_xlsx.XlsxItemExporter',
 # }
 
-# DOWNLOAD_DELAY = 1
+DOWNLOAD_DELAY = 0.01
 # CONCURRENT_REQUESTS_PER_DOMAIN = 40
 # CONCURRENT_REQUESTS_PER_IP = 40
 # RETRY_HTTP_CODES = [403, 429, 500, 503]
-# RETRY_TIMES = 10
-# LOG_ENABLED = True
+RETRY_TIMES = 20
+LOG_ENABLED = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
