@@ -13,7 +13,7 @@ SPIDER_MODULES = ['dotmad.spiders']
 NEWSPIDER_MODULE = 'dotmad.spiders'
 
 
-ChormeDriver = '/home/manish/projects/RestBoilerplate/docs/Dotmad/dotmad/chromedriver'
+ChormeDriver = b'C:\Users\Aayush\Desktop\Dotmad\dotmad\chromedriver.exe'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'dotmad (+http://www.yourdomain.com)'
 USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'
@@ -24,12 +24,12 @@ ROBOTSTXT_OBEY = False
 #     'xlsx': 'scrapy_xlsx.XlsxItemExporter',
 # }
 
-DOWNLOAD_DELAY = 0.01
-CONCURRENT_REQUESTS_PER_DOMAIN = 40
-CONCURRENT_REQUESTS_PER_IP = 40
-RETRY_HTTP_CODES = [403, 429, 500, 503]
-RETRY_TIMES = 10
-LOG_ENABLED = True
+# DOWNLOAD_DELAY = 1
+# CONCURRENT_REQUESTS_PER_DOMAIN = 40
+# CONCURRENT_REQUESTS_PER_IP = 40
+# RETRY_HTTP_CODES = [403, 429, 500, 503]
+# RETRY_TIMES = 10
+# LOG_ENABLED = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -75,7 +75,7 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'dotmad.pipelines.DotmadPipeline': 300,
+   'dotmad.pipelines.DotmadPipeline': 3000,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

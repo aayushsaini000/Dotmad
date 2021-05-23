@@ -64,7 +64,7 @@ class DotMad1Spider(scrapy.Spider):
         if datalinks:
             for dataobj in datalinks:
                 Url = urljoin(response.url, dataobj)
-                yield scrapy.Request(url = Url, callback=self.ScrapData, dont_filter = True)
+                yield scrapy.Request(url = Url, callback=self.ScrapData)
 
 
 
@@ -78,6 +78,8 @@ class DotMad1Spider(scrapy.Spider):
         
         selenium_response_text = driver.page_source
         new_selector = Selector(text=selenium_response_text)
+
+        # new_selector = response
         items = DotmadItem()
 
         LineData = new_selector.css(".visit_menu_link li span::text").extract()
@@ -92,7 +94,10 @@ class DotMad1Spider(scrapy.Spider):
         ListingLink = response.url
         AskingPrice = new_selector.css(".price::text").extract()[0].strip() if new_selector.css(".price::text").extract() else None
         Condition = new_selector.css(".item_description_list ul li::text").extract()[0].replace(u'\xa0', u' ').strip() if new_selector.css(".item_description_list ul li::text").extract() else None
-        QtyAvailable = new_selector.css(".listing_info li::text").extract()[-3].strip() if new_selector.css(".listing_info li::text").extract() else None
+        try:
+            QtyAvailable = new_selector.css(".listing_info li::text").extract()[-3].strip() if new_selector.css(".listing_info li::text").extract()[-3].strip() != '' else new_selector.css(".listing_info li::text").extract()[-2].strip()
+        except Exception:
+            QtyAvailable= None
         InStock = new_selector.css(".active::text").extract()[0].strip() if new_selector.css(".active::text").extract() else None
         Date = new_selector.css(".listing_info li::text").extract()[-1].strip() if new_selector.css(".listing_info li::text").extract() else None
         Company = new_selector.css(".ratting:nth-child(1) .seller_name::text").extract()[0].strip() if new_selector.css(".ratting:nth-child(1) .seller_name::text").extract() else None
@@ -104,11 +109,11 @@ class DotMad1Spider(scrapy.Spider):
         Brand = new_selector.css(".item_description_list ul li::text").extract()[1].replace(u'\xa0', u' ').strip() if new_selector.css(".item_description_list ul li::text").extract() else None
         Type = new_selector.css(".item_description_list ul li::text").extract()[2].replace(u'\xa0', u' ').strip() if new_selector.css(".item_description_list ul li::text").extract() else None
         Model = new_selector.css(".item_description_list ul li::text").extract()[3].replace(u'\xa0', u' ').strip() if new_selector.css(".item_description_list ul li::text").extract() else None
-        # DescriptionData = new_selector.css(".additional_info::text").extract()
-        # if DescriptionData:
-        #     Description = ' '.join(DescriptionData)
-        # else:
-        #     Description = None
+        DescriptionData = new_selector.css(".additional_info::text").extract()
+        if DescriptionData:
+            Description = ' '.join(DescriptionData)
+        else:
+            Description = None
 
         items['Line']=Line
         items['ListingTitle']=ListingTitle
@@ -130,7 +135,6 @@ class DotMad1Spider(scrapy.Spider):
         items['Model']=Model
         items['Category']=Category
         items['SubCategory']=SubCategory
-
-        #items['Description']=Description
+        items['Description']=Description
         yield items  
 

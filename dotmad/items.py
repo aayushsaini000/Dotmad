@@ -27,5 +27,5 @@ class DotmadItem(scrapy.Item):
     Model = scrapy.Field()
     Category = scrapy.Field()
     SubCategory = scrapy.Field()
-    #Description = scrapy.Field()
+    Description = scrapy.Field()
     pass

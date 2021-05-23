@@ -29,7 +29,7 @@ class DotmadPipeline:
             'Line', 'ListingTitle', 'ListingNumber', 'ListingLink', 'AskingPrice',
             'Condition', 'QtyAvailable', 'InStock', 'Date', 'Company', 'RepName', 'RepLink',
             'Reviews', 'Location', 'Phone', 'Brand', 'Type', 'Model',
-            'Category','SubCategory']
+            'Category','SubCategory','Description']
 
     @classmethod
     def from_crawler(cls, crawler):
